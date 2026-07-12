@@ -1,0 +1,18 @@
+# 双星幻夜 / TwinStar Fantasia
+
+> 皎朧與夜綾的單頁角色介紹網站，內容聚焦幻月界、守界者、星降之谷與雙星現象。
+
+## Characters
+
+- 皎朧 / Koro: 月龍守界者
+- 夜綾 / Yoraya: 夜狐巡界者
+
+## Credits and usage
+
+- Character design & illustration: 九櫻 @9saki_000
+- Hero background: 凡椛落盡 @fanhua37
+- Copyright: 孤之界 @Kon_no_kai
+- [完整設定與創作規範](https://app.notion.com/p/320da7b2791c800aaf28d2e5865debe4)
+- [聯絡角色擁有者](mailto:contact@konnokai.me)
+
+Official character artwork must not be used for AI generation, model training, or other AI-derived applications.
