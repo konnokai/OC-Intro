@@ -79,6 +79,8 @@ The creation-guidelines CTA opens an in-page modal containing the canonical Noti
 
 The closing section uses an asymmetric rules-ledger composition: important boundaries occupy the dominant column, while creation tags and contact routes form the supporting column. The footer pairs a large group signature with a three-row credit ledger and includes the hero background credit.
 
+On the `resonance-option-3` branch, the resonance statement uses an editorial hierarchy instead of two equal headings. `靠近彼此時` becomes a restrained lead-in, while the single semantic heading is split into two offset lines to give the copy more breathing room and visual movement.
+
 ## Technical Stack
 
 - Vue 3 with Composition API.

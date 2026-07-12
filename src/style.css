@@ -806,8 +806,8 @@ address {
 }
 
 .resonance-copy {
-  max-width: 570px;
-  padding: clamp(3rem, 7vw, 7rem);
+  max-width: 640px;
+  padding: clamp(3rem, 5.5vw, 6rem);
 }
 
 .resonance-index {
@@ -816,8 +816,40 @@ address {
   letter-spacing: 0.22em;
 }
 
-.resonance-copy h2 {
-  font-size: clamp(2.7rem, 4.8vw, 5.2rem);
+.resonance-heading {
+  margin-top: 1.8rem;
+}
+
+.resonance-lead {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #c7c9d5;
+  font: 500 clamp(0.82rem, 1.15vw, 1.02rem)/1.5 var(--font-display);
+  letter-spacing: 0.2em;
+}
+
+.resonance-lead::before {
+  content: "";
+  width: clamp(2.5rem, 4vw, 4rem);
+  height: 1px;
+  background: linear-gradient(90deg, var(--vermilion-bright), rgba(204, 74, 93, 0.12));
+}
+
+.resonance-heading h2 {
+  margin-top: 0.75rem;
+  font-size: clamp(3.25rem, 4.8vw, 5.2rem);
+  line-height: 1.02;
+}
+
+.resonance-heading h2 span {
+  display: block;
+  white-space: nowrap;
+}
+
+.resonance-heading h2 span + span {
+  margin-top: 0.08em;
+  margin-left: clamp(1.5rem, 3vw, 3.5rem);
 }
 
 .resonance-copy > p:not(.resonance-index) {
@@ -1668,8 +1700,20 @@ address {
     padding: 4rem 1rem 5rem;
   }
 
-  .resonance-copy h2 {
-    font-size: clamp(2.65rem, 13vw, 4rem);
+  .resonance-copy {
+    max-width: 100%;
+  }
+
+  .resonance-heading {
+    margin-top: 1.5rem;
+  }
+
+  .resonance-heading h2 {
+    font-size: clamp(3rem, 14vw, 4rem);
+  }
+
+  .resonance-heading h2 span + span {
+    margin-left: 0.75rem;
   }
 
   .story-path {
