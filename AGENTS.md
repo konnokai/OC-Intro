@@ -156,6 +156,8 @@ Do not invent new canonical biography, abilities, relationships, or world events
 
 The site is a static Vite application. Deployment-specific files are under `public/`, including `_headers` and `robots.txt`.
 
+`src/assets/OGImage.webp` is the source social-sharing image. Keep `public/OGImage.webp` synchronized as its deployable copy and reference `/OGImage.webp` from page metadata.
+
 Keep long-lived immutable caching limited to fingerprinted assets. Keep `index.html` revalidated so new deployments become visible promptly.
 
 Before considering a task complete, run:
@@ -175,7 +177,9 @@ src/App.vue                  Page composition and reveal behavior
 src/style.css                Design system and responsive styling
 src/data/characters.js       Character and world content data
 src/components/              Page sections and navigation
+src/assets/OGImage.webp      Source social-sharing image
 src/assets/characters/       Official character artwork
+public/OGImage.webp          Stable deployed social-sharing image
 public/_headers              Cloudflare response headers and caching
 vite.config.js               Vue and Tailwind Vite integration
 ```
