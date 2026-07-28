@@ -6,6 +6,10 @@ This project is a single-page character introduction website for `双星幻夜 (
 
 The canonical content source is the Notion document `孤之界的 OC 設定 & 立繪`, including the child pages `皎朧詳細文字設定` and `夜綾詳細文字設定`.
 
+`PRODUCT.md` records durable product truth, audience priorities, capabilities, constraints, and brand commitments. Read it before product or design decisions and keep visual-system choices in their own design documentation.
+
+`DESIGN.md` records the incumbent visual system and is the authority for visual tokens, layout grammar, depth, shapes, components, and design guardrails. `.impeccable/design.json` is its generated extension for design-tool previews and must be regenerated whenever `DESIGN.md` is regenerated.
+
 Read `IMPLEMENTATION_PLAN.md` before making substantial design, content, architecture, or deployment changes.
 
 ## Working Directory
@@ -94,14 +98,14 @@ Use Font Awesome for interface icons. Decorative motifs should preferably be imp
 - Palette: night purple, cherry pink, ink black
 - Composition: more kinetic and playful than Koro's sections
 - Personality: playful, perceptive, emotionally observant
-- Abilities: fox fire, illusions, night step
+- Abilities: `狐火`, `幻影分身`, `夜行步`
 - The left-hand night mark is a meaningful character detail.
 
 ### Shared Narrative
 
 - Both characters are boundary guardians.
 - Their relationship should be expressed through contrast and resonance rather than mirrored profile cards.
-- Important concepts include `世界裂隙`, `遠古夜禍`, `星降之谷`, and `雙星現象`.
+- Important concepts include `世界裂縫`, `上古夜禍`, `星降之谷`, and `雙星現象`.
 
 ## Assets
 
@@ -132,12 +136,16 @@ Explicit restrictions include no AI generation/training/use, no damage to Koro's
 
 Do not invent new canonical biography, abilities, relationships, or world events. Clearly separate non-canonical presentation copy from established settings.
 
+Character and setting introductions may intentionally use poetic exaggeration, dramatic declarations, and heightened fantasy language. Do not treat those forms as AI-writing defects by themselves; review them for canonical accuracy, provenance, and readability instead.
+
 ## Implementation Rules
 
 - Prefer small, focused changes that preserve the existing component structure.
 - Keep content data in `src/data/characters.js` when practical.
+- Keep canonical summaries accurate and website-only prose structurally distinct, but do not add visible source labels such as `公開設定摘要` or `敘事導語` to the interface.
 - Maintain semantic HTML, keyboard accessibility, useful alternative text, and visible focus states.
 - Keep the full creation rules in the accessible in-page modal opened by `CreationGuidelines`; do not restore the CTA as a new-tab Notion link.
+- Keep the creation-guidelines quick check in the modal before the full terms, including `可直接創作`, `需先詢問`, `禁止內容`, the rules version, and direct contact routes.
 - Respect `prefers-reduced-motion` for all new animations.
 - Avoid adding dependencies when CSS or an existing package can solve the problem cleanly.
 - Use responsive image formats and avoid increasing initial page weight unnecessarily.
@@ -172,6 +180,10 @@ The build must produce `dist/` without errors.
 
 ```text
 AGENTS.md                    Current project instructions; update automatically when they change
+PRODUCT.md                   Durable product truth and constraints
+DESIGN.md                    Incumbent visual-system authority
+.impeccable/design.json      Design-system preview metadata and component snippets
+.impeccable/live/config.json Impeccable Live entry and CSP-check configuration
 IMPLEMENTATION_PLAN.md       Project plan and continuation notes
 src/App.vue                  Page composition and reveal behavior
 src/style.css                Design system and responsive styling
@@ -188,7 +200,7 @@ vite.config.js               Vue and Tailwind Vite integration
 
 When continuing in a new session:
 
-1. Read this file and `IMPLEMENTATION_PLAN.md`.
+1. Read this file, `PRODUCT.md`, `DESIGN.md`, and `IMPLEMENTATION_PLAN.md`.
 2. Inspect the current files before proposing or making changes.
 3. Preserve the no-snow Koro direction and the contrast between Koro and Yoraya.
 4. Use Font Awesome rather than Unicode emoji.

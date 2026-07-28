@@ -1,8 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 const isOpen = ref(false)
+const isMobile = ref(false)
+const menuToggle = ref(null)
+let mobileQuery
 
 const links = [
   { href: '#world', label: '世界' },
@@ -15,10 +18,33 @@ const links = [
 const close = () => {
   isOpen.value = false
 }
+
+const closeAndRestoreFocus = async () => {
+  close()
+  await nextTick()
+  menuToggle.value?.focus()
+}
+
+const handleKeydown = (event) => {
+  if (event.key === 'Escape' && isOpen.value) closeAndRestoreFocus()
+}
+
+const syncMobileState = () => {
+  isMobile.value = mobileQuery.matches
+  if (!isMobile.value) close()
+}
+
+onMounted(() => {
+  mobileQuery = window.matchMedia('(max-width: 900px)')
+  syncMobileState()
+  mobileQuery.addEventListener('change', syncMobileState)
+})
+
+onUnmounted(() => mobileQuery?.removeEventListener('change', syncMobileState))
 </script>
 
 <template>
-  <header class="site-nav" :class="{ 'menu-open': isOpen }">
+  <header class="site-nav" :class="{ 'menu-open': isOpen }" @keydown="handleKeydown">
     <a class="brand-mark" href="#top" @click="close">
       <span class="brand-seal">双</span>
       <span class="brand-copy">
@@ -28,6 +54,7 @@ const close = () => {
     </a>
 
     <button
+      ref="menuToggle"
       class="menu-toggle"
       type="button"
       :aria-expanded="isOpen"
@@ -38,7 +65,13 @@ const close = () => {
       <FontAwesomeIcon :icon="isOpen ? faXmark : faBars" />
     </button>
 
-    <nav id="primary-navigation" class="nav-links" aria-label="主要導覽">
+    <nav
+      id="primary-navigation"
+      class="nav-links"
+      aria-label="主要導覽"
+      :aria-hidden="isMobile && !isOpen ? 'true' : undefined"
+      :inert="isMobile && !isOpen"
+    >
       <a v-for="link in links" :key="link.href" :href="link.href" @click="close">
         {{ link.label }}
       </a>

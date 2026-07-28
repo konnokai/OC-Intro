@@ -91,10 +91,10 @@ onUnmounted(() => {
             </div>
           </header>
           <ul>
+            <li>一般非商用二創可直接發布；R18 可創作，但禁止 R18-G。</li>
+            <li>商用、周邊販售或未列明用途，請先聯絡孤之界確認。</li>
             <li>禁止任何 AI 創作、模型訓練或將作品用於 AI 應用。</li>
             <li>禁止皎朧龍角損毀、破壞角色形象與誤導為官方立場。</li>
-            <li>禁止仇恨、歧視、極端宣傳與違反法律的內容。</li>
-            <li>商用、周邊販售或未列明用途，請先聯絡孤之界確認。</li>
           </ul>
         </article>
 
@@ -129,7 +129,7 @@ onUnmounted(() => {
           <div class="contact-routes">
             <a href="mailto:contact@konnokai.me">contact@konnokai.me</a>
             <p>Discord / konnokai</p>
-            <p>X / @Kon_no_kai</p>
+            <a href="https://x.com/Kon_no_kai" rel="noreferrer" target="_blank">X / @Kon_no_kai</a>
           </div>
         </address>
       </div>
@@ -177,39 +177,87 @@ onUnmounted(() => {
 
             <div class="guidelines-modal-content">
               <p id="guidelines-modal-intro" class="guidelines-modal-intro">
-                R18 創作大歡迎，但禁止 R18-G。創作前請確認以下界線；未提及之處以孤之界的認定與解釋為準。
+                先依用途確認是否需要聯絡，再閱讀完整條款。R18 可創作，但禁止 R18-G。
               </p>
 
-              <article class="guidelines-modal-section guidelines-modal-section--warning">
-                <h3>禁止內容</h3>
-                <ul>
-                  <li>「皎朧」龍角損毀相關創作，包括但不限於折角、磨角、拆角等。</li>
-                  <li>懷孕相關創作。</li>
-                  <li>禿頭相關創作。</li>
-                  <li>使用 AI 進行任何創作或模型訓練，包括但不限於圖片、聲音等；可以使用 Adobe Illustrator。</li>
-                  <li>將我方作品用於 AI 應用。</li>
-                  <li>聲稱為官方作品，或將創作誤導為我方立場。</li>
-                  <li>仇恨言論、歧視、極端政治或宗教宣傳。</li>
-                  <li>違反法律或破壞角色形象之內容。</li>
-                  <li>尚未提及之處以我方認定為準。</li>
-                </ul>
-              </article>
+              <section class="guidelines-decision" aria-labelledby="guidelines-decision-title">
+                <header>
+                  <div>
+                    <span>QUICK CHECK</span>
+                    <h3 id="guidelines-decision-title">先確認這次創作屬於哪一類</h3>
+                  </div>
+                  <time datetime="2026-07-08">規範版本 2026.07.08</time>
+                </header>
+
+                <div class="guidelines-decision-grid">
+                  <article class="guidelines-decision-item guidelines-decision-item--allowed">
+                    <h4>可直接創作</h4>
+                    <p>一般非商用二創與自己手工製作、僅供個人收藏的作品可直接進行；R18 可創作，但禁止 R18-G。</p>
+                  </article>
+
+                  <article class="guidelines-decision-item guidelines-decision-item--contact">
+                    <h4>需先詢問</h4>
+                    <p>商業使用、販售、委託廠商製作實體周邊，以及規範未列明或用途不確定的情況。</p>
+                  </article>
+
+                  <article class="guidelines-decision-item guidelines-decision-item--blocked">
+                    <h4>禁止內容</h4>
+                    <p>AI 相關使用、皎朧龍角損毀、懷孕、禿頭、R18-G，以及仇恨、歧視、極端宣傳、違法或破壞角色形象的內容。</p>
+                  </article>
+                </div>
+
+                <div class="guidelines-decision-contact">
+                  <p>用途不明時，先聯絡孤之界確認。</p>
+                </div>
+                <p class="guidelines-decision-note">以上摘要協助快速判斷，完整條款仍以下方內容為準。</p>
+              </section>
+
+              <section class="guidelines-modal-section guidelines-modal-section--warning" aria-labelledby="full-prohibitions-title">
+                <h3 id="full-prohibitions-title">完整禁止內容</h3>
+                <div class="guidelines-prohibition-grid">
+                  <article>
+                    <h4>角色與成人內容</h4>
+                    <ul>
+                      <li>「皎朧」龍角損毀相關創作，包括但不限於折角、磨角、拆角等。</li>
+                      <li>懷孕相關創作。</li>
+                      <li>禿頭相關創作。</li>
+                      <li>R18-G 相關創作。</li>
+                    </ul>
+                  </article>
+                  <article>
+                    <h4>AI 與官方身分</h4>
+                    <ul>
+                      <li>使用 AI 進行任何創作或模型訓練，包括但不限於圖片、聲音等；可以使用 Adobe Illustrator。</li>
+                      <li>將我方作品用於 AI 應用。</li>
+                      <li>聲稱為官方作品，或將創作誤導為我方立場。</li>
+                    </ul>
+                  </article>
+                  <article>
+                    <h4>危害與其他情況</h4>
+                    <ul>
+                      <li>仇恨言論、歧視、極端政治或宗教宣傳。</li>
+                      <li>違反法律或破壞角色形象之內容。</li>
+                      <li>尚未提及之處以我方認定為準。</li>
+                    </ul>
+                  </article>
+                </div>
+              </section>
 
               <div class="guidelines-modal-grid">
                 <article class="guidelines-modal-section">
                   <h3>作品使用與推廣</h3>
-                <ul>
-                  <li>二創作品可能基於推廣用途使用於直播或社群平台上，使用時會標註作者。</li>
-                  <li>若有製作周邊的需求，會另行與作者聯繫。</li>
-                </ul>
+                  <ul>
+                    <li>二創作品可能基於推廣用途使用於直播或社群平台上，使用時會標註作者。</li>
+                    <li>若有製作周邊的需求，會另行與作者聯繫。</li>
+                  </ul>
                 </article>
 
                 <article class="guidelines-modal-section">
                   <h3>商用或周邊販售</h3>
                   <ul>
                     <li>需先向孤之界告知並取得確認。</li>
-                    <li>若有實體周邊產出，需與廠商簽約。</li>
-                    <li>手工製作收藏不需告知。</li>
+                    <li>委託廠商製作實體周邊時，需先取得確認並與廠商簽約。</li>
+                    <li>自己手工製作且僅供個人收藏，不需事前告知。</li>
                     <li>有任何疑慮請向本人詢問。</li>
                   </ul>
                 </article>
@@ -233,7 +281,7 @@ onUnmounted(() => {
                 <address>
                   <span>Discord / konnokai</span>
                   <a href="mailto:contact@konnokai.me">Email / contact@konnokai.me</a>
-                  <span>X / @Kon_no_kai</span>
+                  <a href="https://x.com/Kon_no_kai" rel="noreferrer" target="_blank">X / @Kon_no_kai</a>
                 </address>
               </article>
 
