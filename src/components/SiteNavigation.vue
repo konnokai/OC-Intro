@@ -1,6 +1,7 @@
 <script setup>
 import { nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
+import logo from '../assets/icon/logo.webp'
 
 const isOpen = ref(false)
 const isMobile = ref(false)
@@ -46,7 +47,7 @@ onUnmounted(() => mobileQuery?.removeEventListener('change', syncMobileState))
 <template>
   <header class="site-nav" :class="{ 'menu-open': isOpen }" @keydown="handleKeydown">
     <a class="brand-mark" href="#top" @click="close">
-      <span class="brand-seal">双</span>
+      <img class="brand-logo" :src="logo" alt="" width="256" height="233" />
       <span class="brand-copy">
         <strong>双星幻夜</strong>
         <small>TWINSTAR FANTASIA</small>

@@ -22,7 +22,7 @@ The product combines a creator-owned character introduction with an authoritativ
 
 ## Operating Context
 
-- Visitors browse a single public page on desktop or mobile, moving through the world introduction, individual character sections, the shared Twin Star phenomenon, encounter story, and creation guidance.
+- Visitors browse a single public page on desktop or mobile, moving through the world introduction, individual character sections, the shared TwinStar phenomenon, encounter story, and creation guidance.
 - The complete creation rules open in an in-page dialog so visitors can consult them without leaving the character experience.
 - Fan creators use the published tags on social platforms and can contact 孤之界 through Discord, email, or X when a use is commercial, unclear, or requires approval.
 - The Notion document `孤之界的 OC 設定 & 立繪`, including `皎朧詳細文字設定` and `夜綾詳細文字設定`, is the canonical source. The website is a selected public presentation of that material.
@@ -30,7 +30,7 @@ The product combines a creator-owned character introduction with an authoritativ
 ## Capabilities and Constraints
 
 - The product is a static Vue single-page website deployed for public access through Cloudflare.
-- It provides character and world introductions, responsive official artwork, an interactive Twin Star resonance moment, social-sharing metadata, ownership credits, contact details, creation tags, and an accessible creation-guidelines dialog.
+- It provides character and world introductions, responsive official artwork, an interactive TwinStar resonance moment, social-sharing metadata, ownership credits, contact details, creation tags, and an accessible creation-guidelines dialog.
 - It has no accounts, private workflows, commerce, community posting, or user-generated content.
 - Future work must not invent canonical biography, abilities, relationships, or world events. Non-canonical presentation copy must remain clearly distinguishable from established settings.
 - Official character artwork must not be regenerated, redrawn, retouched, replaced, used for AI generation or training, or used in other AI-derived applications.
@@ -65,7 +65,7 @@ The product combines a creator-owned character introduction with an authoritativ
 1. Canonical truth comes before promotional invention.
 2. Character discovery and creation boundaries belong in the same public experience.
 3. Ownership, artist credit, contact routes, and usage restrictions must remain explicit and accurate.
-4. Koro and Yoraya should be understood through their contrast, shared guardianship, and Twin Star resonance.
+4. Koro and Yoraya should be understood through their contrast, shared guardianship, and TwinStar resonance.
 5. The site should remain usable as an open, responsive, accessible reference without requiring an account or external document for essential rules.
 
 ## Accessibility & Inclusion

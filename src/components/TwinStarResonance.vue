@@ -1,7 +1,16 @@
 <template>
   <section id="resonance" class="resonance-section">
+    <div class="resonance-visual" aria-hidden="true">
+      <img
+        class="resonance-art"
+        src="../assets/background/Aizi166cm.webp"
+        alt=""
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
     <div class="resonance-copy reveal" data-reveal>
-      <p class="resonance-index">TWIN STAR PHENOMENON / 02</p>
+      <p class="resonance-index">TWINSTAR PHENOMENON / 02</p>
       <hgroup class="resonance-heading">
         <p class="resonance-lead">靠近彼此時</p>
         <h2>

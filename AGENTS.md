@@ -114,9 +114,10 @@ Character artwork is stored in:
 ```text
 src/assets/characters/
 src/assets/background/
+src/assets/icon/
 ```
 
-The character PNG files are the user-provided transparent source illustrations. WebP variants are optimized delivery assets. `background/Fanhua.webp` is the approved hero scene. Preserve PNG fallbacks when changing character image rendering.
+The character PNG files are the user-provided transparent source illustrations. WebP variants are optimized delivery assets. `background/Fanhua.webp` is the approved hero scene. `icon/logo.png` is the official source logo; `icon/logo.webp`, `public/favicon.ico`, and `public/apple-touch-icon.png` are derived delivery assets. Preserve PNG fallbacks when changing character image rendering.
 
 Do not regenerate, redraw, retouch, or replace official character artwork with generative AI. Do not use the artwork for AI training or other AI-derived asset generation.
 
@@ -128,6 +129,7 @@ Keep visible credit and usage guidance accurate:
 - Character owner/contact: `孤之界 (@Kon_no_kai)`
 - Design and illustration: `九櫻 (@9saki_000)`
 - Hero background: `凡椛落盡 (@fanhua37)`
+- Resonance artwork: `阿展(法法) (@Aizi166cm)`
 - Contact email: `contact@konnokai.me`
 - Discord: `konnokai`
 - Creation tags: `綾朧來跨麥`, `綾朧有致`
@@ -191,7 +193,9 @@ src/data/characters.js       Character and world content data
 src/components/              Page sections and navigation
 src/assets/OGImage.webp      Source social-sharing image
 src/assets/characters/       Official character artwork
+src/assets/icon/             Official logo and optimized navigation asset
 public/OGImage.webp          Stable deployed social-sharing image
+public/favicon.ico           Official logo favicon
 public/_headers              Cloudflare response headers and caching
 vite.config.js               Vue and Tailwind Vite integration
 ```

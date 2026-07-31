@@ -140,6 +140,7 @@ onUnmounted(() => {
       <div class="footer-credits">
         <p>Character design & illustration: 九櫻 @9saki_000</p>
         <p>Hero background: 凡椛落盡 @fanhua37</p>
+        <p>Resonance artwork: 阿展(法法) @Aizi166cm</p>
         <p>Copyright: 孤之界 @Kon_no_kai</p>
       </div>
     </footer>

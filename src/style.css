@@ -198,15 +198,11 @@ address {
   min-height: 44px;
 }
 
-.brand-seal {
-  display: grid;
-  width: 2.35rem;
-  height: 2.35rem;
-  place-items: center;
-  border: 1px solid rgba(204, 74, 93, 0.65);
-  color: var(--vermilion-bright);
-  font: 700 1.25rem/1 var(--font-display);
-  transform: rotate(-3deg);
+.brand-logo {
+  flex: none;
+  width: 2.9rem;
+  height: auto;
+  filter: drop-shadow(0 0 0.8px rgba(237, 243, 244, 0.75));
 }
 
 .brand-copy {
@@ -742,13 +738,40 @@ address {
 .resonance-section {
   position: relative;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+  overflow: hidden;
+  padding-inline: max(1.5rem, calc((100% - 1320px) / 2));
   border-block: 1px solid var(--line);
   background: #0b0c1d;
 }
 
+.resonance-visual {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.resonance-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(11, 12, 29, 0.95) 0%, rgba(11, 12, 29, 0.82) 26%, rgba(11, 12, 29, 0.45) 45%, rgba(11, 12, 29, 0.08) 65%),
+    linear-gradient(180deg, rgba(11, 12, 29, 0.45), transparent 30%, transparent 70%, rgba(11, 12, 29, 0.6));
+}
+
+.resonance-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+}
+
 .resonance-copy {
-  max-width: 720px;
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
   padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 4vw, 3rem);
 }
 
@@ -1667,6 +1690,30 @@ address {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
+
+  .resonance-section {
+    align-items: stretch;
+  }
+
+  .resonance-visual::after {
+    background:
+      linear-gradient(180deg, rgba(11, 12, 29, 0.94) 0%, rgba(11, 12, 29, 0.6) 24%, rgba(11, 12, 29, 0.12) 44%, rgba(11, 12, 29, 0.12) 56%, rgba(11, 12, 29, 0.62) 76%, rgba(11, 12, 29, 0.95) 100%);
+  }
+
+  .resonance-art {
+    object-position: center center;
+  }
+
+  .resonance-copy {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .resonance-copy > p:last-child {
+    margin-top: auto;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1801,7 +1848,7 @@ address {
   .tag-panel,
   .rule-panel,
   .contact-panel {
-    padding: 2rem 0;
+    padding: 2rem 1.25rem;
   }
 
   .rule-panel li {

@@ -10,3 +10,5 @@ Thumbs.db
 !.dev.vars.example
 .env*
 !.env.example
+
+dev-log.txt
