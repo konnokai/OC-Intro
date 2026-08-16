@@ -82,7 +82,8 @@
       {"name": "reveal", "value": "0.8s cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "章節內容進入視窗時的淡入與上移。"},
       {"name": "state", "value": "0.25s ease", "purpose": "導覽、按鈕、關閉控制與模態狀態切換。"},
       {"name": "resonance", "value": "1s cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "雙星能量靠近與中心印記旋轉。"},
-      {"name": "hero-settle", "value": "1.6s cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "首頁場景初次載入時的輕微縮放收束。"}
+      {"name": "hero-settle", "value": "1.6s cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "首頁場景初次載入時的輕微縮放收束。"},
+      {"name": "intro-gate", "value": "0.8s cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "全頁圖片完成載入後，鳥居短暫顯現並向鏡頭放大以銜接 Hero。"}
     ],
     "breakpoints": [
       {"name": "compact-mobile", "value": "640px"},

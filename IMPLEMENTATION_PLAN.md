@@ -28,6 +28,10 @@ Website summaries were aligned with the revised setting already synchronized to 
 
 Visible `公開設定摘要` and `敘事導語` labels were removed from the hero, world, character, resonance, and encounter sections at the owner's direction. Canonical and website-only copy remain separated through component structure, source data, and documentation rather than interface labels.
 
+## 2026-08-16 Intro Loading Gate
+
+The first visit now waits for the page's Logo, Hero, character, and resonance images while showing an accessible percentage progress bar. The loading state keeps the official Logo and moon-ring composition free of a persistent torii; after resources settle, a custom vector torii briefly appears and scales through the viewport to reveal the Hero. Image errors count as settled so the page cannot remain blocked, and `prefers-reduced-motion` skips the passage animation while preserving resource loading. The document scrollbar is visually hidden without disabling wheel, touch, or keyboard scrolling, preventing the Hero width from shifting when the intro scroll lock is released.
+
 ## Verification
 
 - `npm run build`

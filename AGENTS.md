@@ -69,6 +69,13 @@ Current hero direction:
 - Portrait mobile uses a centered crop with the title above and supporting copy plus CTA below, leaving the middle of the scene clear for both characters.
 - Preserve clear space around the hero title and CTA; overlays must not obscure faces, Koro's horns, or Yoraya's tail.
 
+Current intro direction:
+
+- Initial entry waits for the page Logo, Hero, character, and resonance images and reports actual settled-image progress.
+- The loading composition contains the official Logo, moon ring, and progress only. The custom vector torii appears only after loading completes, then scales through the viewport to reveal the Hero.
+- Reduced Motion skips the torii passage after resource loading.
+- Keep the document scrollbar visually hidden while preserving wheel, touch, and keyboard scrolling so intro scroll locking does not shift the Hero width.
+
 Avoid:
 
 - Generic card grids and excessive rounded containers
