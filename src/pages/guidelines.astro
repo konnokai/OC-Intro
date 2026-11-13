@@ -1,0 +1,175 @@
+---
+import Base from '../layouts/Base.astro';
+import { guidelines, hashtagUrl } from '../data/guidelines';
+---
+
+<Base title={guidelines.title}>
+  <section class="band surface-moon guidelines">
+    <div class="wrap guidelines__grid">
+      <h1 class="guidelines__title">{guidelines.title}</h1>
+      <div class="guidelines__body">
+        <p class="lead">{guidelines.r18}</p>
+
+        <h2>{guidelines.prohibited.heading}</h2>
+        <ul class="prohibited">
+          {guidelines.prohibited.items.map((item) => <li>{item}</li>)}
+        </ul>
+        <p class="note">{guidelines.prohibited.note}</p>
+
+        <h2>{guidelines.usage.heading}</h2>
+        <p>{guidelines.usage.text}</p>
+
+        <h2>{guidelines.commercial.heading}</h2>
+        <ul>
+          {guidelines.commercial.items.map((item) => <li>{item}</li>)}
+        </ul>
+
+        <h2>{guidelines.tags.heading}</h2>
+        <ul class="tags">
+          {
+            guidelines.tags.items.map((item) => (
+              <li>
+                <a class="text-link" href={hashtagUrl(item.tag)} target="_blank" rel="noopener">
+                  #{item.tag}
+                </a>
+                <span class="tags__label">{item.label}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="note">{guidelines.tags.note}</p>
+
+        <h2>{guidelines.rights.heading}</h2>
+        <p>{guidelines.rights.text}</p>
+
+        <h2>{guidelines.contact.heading}</h2>
+        <p class="note">{guidelines.contact.note}</p>
+        <ol class="contact">
+          {
+            guidelines.contact.items.map((item) => (
+              <li>
+                {'href' in item ? (
+                  <a
+                    class="text-link"
+                    href={item.href}
+                    target={item.href.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href.startsWith('http') ? 'noopener' : undefined}
+                  >
+                    {item.label}：{item.value}
+                  </a>
+                ) : (
+                  <span>
+                    {item.label}：{item.value}
+                  </span>
+                )}
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .guidelines__grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .guidelines__title {
+    font-size: clamp(2.25rem, 1.5rem + 3vw, 3.5rem);
+  }
+
+  .guidelines__body {
+    max-inline-size: var(--measure);
+  }
+
+  .guidelines__body h2 {
+    font-size: 1.5rem;
+    margin-block-start: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .guidelines__body > :first-child {
+    margin-block-start: 0;
+  }
+
+  .guidelines__body p {
+    margin-block-start: 0.75rem;
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  .guidelines__body ul,
+  .guidelines__body ol {
+    margin-block-start: 1rem;
+  }
+
+  .guidelines__body li + li {
+    margin-block-start: 0.4rem;
+  }
+
+  .prohibited li::marker {
+    content: "✕  ";
+    color: var(--shu);
+  }
+
+  .note {
+    color: var(--soft);
+    font-size: 0.9375rem;
+  }
+
+  .tags {
+    display: grid;
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .tags a {
+    font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+    font-weight: 900;
+  }
+
+  .tags__label {
+    display: block;
+    color: var(--soft);
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 56rem) {
+    .guidelines__grid {
+      grid-template-columns: minmax(0, 1fr) 5.5rem;
+      column-gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
+    }
+
+    .guidelines__title {
+      grid-column: 2;
+      grid-row: 1;
+      justify-self: end;
+      writing-mode: vertical-rl;
+      position: sticky;
+      top: 2rem;
+      font-size: clamp(3rem, 6vw, 5rem);
+      letter-spacing: 0.15em;
+    }
+
+    .guidelines__body {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .prohibited {
+      columns: 2;
+      column-gap: 2.5rem;
+    }
+
+    .prohibited li {
+      break-inside: avoid;
+    }
+  }
+</style>

@@ -1,0 +1,199 @@
+---
+import Base from '../layouts/Base.astro';
+import VSection from '../components/VSection.astro';
+import MoonPhase from '../components/MoonPhase.astro';
+import Artwork from '../components/Artwork.astro';
+import { bond } from '../data/bond';
+import { artworks } from '../data/artworks';
+---
+
+<Base title="羈絆">
+  <section class="band surface-night">
+    <div class="wrap">
+      <h1 class="bond-title">{bond.title}</h1>
+
+      <div class="bond-art bond-art--lead">
+        <Artwork
+          item={artworks.fanhuaMoon}
+          eager
+          widths={[800, 1200, 1600, 2400]}
+          sizes="(min-width: 72rem) 64rem, 90vw"
+        />
+      </div>
+
+      <VSection heading={bond.positioning.heading}>
+        {bond.positioning.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </VSection>
+
+      <VSection heading={bond.timeline.heading}>
+        <ol class="phases">
+          {
+            bond.timeline.stages.map((stage) => (
+              <li>
+                <MoonPhase phase={stage.phase} />
+                <h3>{stage.name}</h3>
+                <p>{stage.text}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </VSection>
+
+      <VSection heading={bond.dynamic.heading}>
+        {bond.dynamic.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </VSection>
+
+      <div class="bond-art bond-art--together">
+        <Artwork item={artworks.adou6Together} sizes="(min-width: 44rem) 44rem, 92vw" />
+      </div>
+
+      <VSection heading={bond.scenes.heading}>
+        <div class="scenes">
+          {
+            bond.scenes.items.map((scene) => (
+              <section>
+                <h3>{scene.place}</h3>
+                <p>{scene.text}</p>
+              </section>
+            ))
+          }
+        </div>
+      </VSection>
+
+      <blockquote class="quote bond-closing">
+        <p>{bond.closing}</p>
+      </blockquote>
+
+      <p class="bond-links">
+        <a class="text-link" href="/koro/">看皎朧</a>
+        <a class="text-link" href="/yoraya/">看夜綾</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .bond-title {
+    font-size: clamp(2.25rem, 1.5rem + 4vw, 4.5rem);
+    margin-block-end: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .bond-art {
+    margin-block: clamp(3rem, 7vw, 6rem);
+  }
+
+  /* 第一張圖緊接在 h1 下面，上面不再留白 */
+  .bond-art--lead {
+    margin-block-start: 0;
+  }
+
+  .bond-art--together {
+    max-inline-size: 44rem;
+    margin-inline: auto;
+  }
+
+  .phases {
+    display: grid;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .phases li {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    column-gap: 1rem;
+  }
+
+  .phases :global(svg) {
+    grid-row: 1 / span 2;
+  }
+
+  .phases h3 {
+    font-size: 1.125rem;
+  }
+
+  .phases p {
+    margin-block-start: 0.4rem;
+  }
+
+  .scenes {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .scenes h3 {
+    font-size: 1.125rem;
+  }
+
+  .scenes p {
+    margin-block-start: 0.4rem;
+  }
+
+  .bond-closing {
+    margin-block-start: clamp(3rem, 7vw, 6rem);
+  }
+
+  .bond-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2rem;
+    margin-block-start: 2rem;
+  }
+
+  @media (min-width: 56rem) {
+    .phases {
+      position: relative;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 2rem;
+    }
+
+    /* 四個階段依序排開，用一條線把月相中心串起來 */
+    .phases::before {
+      content: "";
+      position: absolute;
+      inset-block-start: 1.5rem;
+      inset-inline: 12.5%;
+      block-size: 1px;
+      background: var(--rule);
+    }
+
+    .phases li {
+      position: relative;
+      grid-template-columns: minmax(0, 1fr);
+      justify-items: start;
+      /* 四欄等高時，不讓多出來的高度攤進各列，標題才會對齊 */
+      align-content: start;
+    }
+
+    .phases :global(svg) {
+      grid-row: auto;
+      justify-self: center;
+    }
+
+    .phases p {
+      max-inline-size: 22em;
+    }
+
+    .scenes {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0;
+    }
+
+    .scenes > section {
+      padding-inline: clamp(1rem, 2.5vw, 2rem);
+    }
+
+    .scenes > section:first-child {
+      padding-inline-start: 0;
+    }
+
+    .scenes > section:last-child {
+      padding-inline-end: 0;
+    }
+
+    .scenes > section + section {
+      border-inline-start: 1px solid var(--rule);
+    }
+  }
+</style>

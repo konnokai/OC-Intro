@@ -1,0 +1,129 @@
+<dialog class="lightbox" closedby="any" aria-labelledby="lightbox-caption">
+  <form method="dialog" class="lightbox__bar">
+    <p id="lightbox-caption"></p>
+    <a class="lightbox__open text-link" target="_blank" rel="noopener">在新分頁開啟</a>
+    <button autofocus>關閉</button>
+  </form>
+  <div class="lightbox__stage"></div>
+</dialog>
+
+<style>
+  .lightbox {
+    border: 0;
+    padding: 0;
+    background: var(--moon);
+    color: var(--ink);
+    max-inline-size: 96vw;
+    max-block-size: 96dvh;
+  }
+
+  .lightbox[open] {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .lightbox:modal {
+    overscroll-behavior: contain;
+  }
+
+  .lightbox::backdrop {
+    background: rgb(21 23 46 / 0.88);
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
+
+  .lightbox__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    margin: 0;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.9375rem;
+  }
+
+  .lightbox__bar p {
+    margin-inline-end: auto;
+  }
+
+  .lightbox__bar button {
+    min-block-size: 2.75rem;
+    padding: 0.25rem 1rem;
+    border: 1px solid currentColor;
+    border-radius: 0;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: 0.9375rem;
+    cursor: pointer;
+  }
+
+  .lightbox__stage {
+    background: #fff;
+    overflow: auto;
+  }
+
+  .lightbox__stage :global(img) {
+    display: block;
+    aspect-ratio: var(--ratio);
+    /* 不放大超過原圖，也不超出視窗（扣掉上方工具列的高度） */
+    inline-size: min(var(--natural), 96vw, calc((96dvh - 4rem) * var(--ratio)));
+    block-size: auto;
+  }
+</style>
+
+<script>
+  const dialog = document.querySelector('.lightbox');
+
+  if (dialog) {
+    const caption = dialog.querySelector('#lightbox-caption');
+    const openLink = dialog.querySelector('.lightbox__open');
+    const stage = dialog.querySelector('.lightbox__stage');
+
+    document.addEventListener('click', (event) => {
+      const trigger = event.target.closest('a[data-lightbox]');
+      if (!trigger) return;
+      // 修飾鍵點擊要保留瀏覽器原本的開新分頁行為
+      if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+
+      const image = document.createElement('img');
+      image.src = trigger.href;
+      image.alt = trigger.dataset.alt ?? '';
+      // 先把原圖尺寸交給 CSS 算版面，圖還沒載完時對話框就是最後的大小，不會跳一下
+      const width = Number(trigger.dataset.width);
+      const height = Number(trigger.dataset.height);
+      image.style.setProperty('--natural', `${width}px`);
+      image.style.setProperty('--ratio', String(width / height));
+      stage.replaceChildren(image);
+
+      caption.textContent = trigger.dataset.caption ?? '';
+      openLink.href = trigger.href;
+      dialog.showModal();
+    });
+
+    dialog.addEventListener('close', () => {
+      stage.replaceChildren();
+    });
+
+    // Safari 還沒有 closedby，自己補點擊背景關閉
+    if (!('closedBy' in HTMLDialogElement.prototype)) {
+      const outside = (event) => {
+        const rect = dialog.getBoundingClientRect();
+        return (
+          event.clientX < rect.left ||
+          event.clientX > rect.right ||
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom
+        );
+      };
+      let pressedOutside = false;
+      dialog.addEventListener('pointerdown', (event) => {
+        pressedOutside = outside(event);
+      });
+      dialog.addEventListener('pointerup', (event) => {
+        if (pressedOutside && outside(event)) dialog.close();
+      });
+    }
+  }
+</script>

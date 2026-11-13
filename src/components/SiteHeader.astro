@@ -1,0 +1,71 @@
+---
+import { site } from '../data/site';
+
+const path = Astro.url.pathname;
+---
+
+<header class="site-header surface-night">
+  <div class="wrap site-header__inner">
+    <a class="site-header__brand" href="/">{site.name}</a>
+    <nav aria-label="主選單">
+      <ul class="site-header__nav">
+        {
+          site.nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={path === item.href ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    padding-block: 1.5rem;
+  }
+
+  .site-header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+  }
+
+  .site-header__brand {
+    font-size: 1.25rem;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .site-header__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9375rem;
+  }
+
+  .site-header__nav a {
+    display: inline-block;
+    padding-block: 0.25rem;
+    text-decoration: none;
+  }
+
+  .site-header__nav a[aria-current="page"] {
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--shu);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35em;
+  }
+</style>

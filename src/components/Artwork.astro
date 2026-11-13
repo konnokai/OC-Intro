@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets';
+
+import type { Artwork } from '../data/artworks';
+
+interface Props {
+  item: Artwork;
+  sizes: string;
+  /** 第一屏的大圖才需要更大的輸出尺寸 */
+  widths?: number[];
+  eager?: boolean;
+}
+
+const { item, sizes, widths = [480, 800, 1200, 1600], eager = false } = Astro.props;
+---
+
+<figure class="artwork">
+  <Image
+    src={item.image}
+    alt={item.alt}
+    widths={widths}
+    sizes={sizes}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : undefined}
+  />
+  <figcaption>
+    繪：{
+      item.artistUrl ? (
+        <a class="text-link" href={item.artistUrl} target="_blank" rel="noopener">
+          {item.artist}
+        </a>
+      ) : (
+        item.artist
+      )
+    }
+  </figcaption>
+</figure>
+
+<style>
+  .artwork img {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  .artwork figcaption {
+    margin-block-start: 0.5rem;
+    color: var(--soft);
+    font-size: 0.875rem;
+  }
+</style>

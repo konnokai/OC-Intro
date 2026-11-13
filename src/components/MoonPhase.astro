@@ -1,0 +1,19 @@
+---
+interface Props {
+  phase: 'crescent' | 'half' | 'gibbous' | 'full';
+}
+
+const { phase } = Astro.props;
+
+const paths = {
+  crescent: 'M12 1A11 11 0 0 1 12 23A6.5 11 0 0 0 12 1Z',
+  half: 'M12 1A11 11 0 0 1 12 23Z',
+  gibbous: 'M12 1A11 11 0 0 1 12 23A6.5 11 0 0 1 12 1Z',
+  full: 'M12 1A11 11 0 0 1 12 23A11 11 0 0 1 12 1Z',
+};
+---
+
+<svg viewBox="0 0 24 24" width="48" height="48" aria-hidden="true">
+  <circle cx="12" cy="12" r="11" fill="var(--night)" stroke="currentColor" stroke-width="1"></circle>
+  <path d={paths[phase]} fill="currentColor"></path>
+</svg>

@@ -1,0 +1,275 @@
+---
+import { Image } from 'astro:assets';
+
+import Base from '../layouts/Base.astro';
+import VSection from '../components/VSection.astro';
+import FigureStage from '../components/FigureStage.astro';
+import SheetGallery from '../components/SheetGallery.astro';
+import Lightbox from '../components/Lightbox.astro';
+import Artwork from '../components/Artwork.astro';
+import { alternateDesign, characters } from '../data/characters';
+import type { CharacterSlug } from '../data/characters';
+import { artworks } from '../data/artworks';
+import { site } from '../data/site';
+
+export function getStaticPaths() {
+  return (Object.keys(characters) as CharacterSlug[]).map((slug) => ({
+    params: { character: slug },
+    props: { character: characters[slug] },
+  }));
+}
+
+const { character } = Astro.props;
+const other = character.slug === 'koro' ? characters.yoraya : characters.koro;
+const surface = character.slug === 'koro' ? 'indigo' : 'violet';
+const artwork = character.slug === 'koro' ? artworks.heimaoKoro : artworks.heimaoYoraya;
+---
+
+<Base title={character.name}>
+  <section class={`stage band surface-${surface}`} data-character={character.slug}>
+    <div class:list={['wrap', 'stage__grid', { 'stage__grid--yoraya': character.slug === 'yoraya' }]}>
+      <header class="stage__head">
+        <h1 class="stage__logo">
+          <Image
+            src={character.logo}
+            alt={character.name}
+            widths={[480, 720, 960]}
+            sizes="(min-width: 25rem) 22rem, 90vw"
+            loading="eager"
+          />
+        </h1>
+        <p class="stage__reading">
+          {character.romaji} / <span lang="ja">{character.kana}</span>
+        </p>
+        <p class="stage__tagline">{character.role}，{character.tagline}</p>
+      </header>
+
+      <div class="stage__figure">
+        <FigureStage character={character} />
+      </div>
+
+      <dl class="profile">
+        {
+          character.profile.map((row) => (
+            <div>
+              <dt>{row.label}</dt>
+              <dd>{row.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </section>
+
+  <section class="band surface-night">
+    <div class="wrap character-text">
+      <div class="character-text__body">
+        {
+          character.sections.map((section) => (
+            <VSection heading={section.heading} id={section.id}>
+              {section.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </VSection>
+          ))
+        }
+      </div>
+      <div class="character-text__art">
+        <Artwork
+          item={artwork}
+          sizes="(min-width: 85rem) 22rem, (min-width: 64rem) 26vw, (min-width: 26rem) 24rem, 92vw"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="band surface-moon">
+    <div class="wrap">
+      <VSection heading="設定資料" id="sheets">
+        <SheetGallery items={character.gallery} />
+        <details class="alt-design">
+          <summary>{alternateDesign.summary}</summary>
+          <SheetGallery items={[alternateDesign]} />
+        </details>
+        <p class="notion-note">
+          沒有衣服的立繪：<a class="text-link" href={site.notion} target="_blank" rel="noopener">在 Notion 觀看</a>
+        </p>
+      </VSection>
+    </div>
+  </section>
+
+  <section class="band surface-night">
+    <div class="wrap next-links">
+      <a class="next-links__character" href={`/${other.slug}/`}>
+        <Image
+          src={other.logo}
+          alt=""
+          widths={[240, 360, 480]}
+          sizes="(min-width: 48rem) 12rem, 50vw"
+        />
+        <span class="text-link">看{other.name}</span>
+      </a>
+      <a class="text-link" href="/bond/">讀兩人的羈絆</a>
+    </div>
+  </section>
+
+  <Lightbox />
+</Base>
+
+<style>
+  .stage__grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .stage__logo {
+    margin: 0;
+  }
+
+  .stage__logo img {
+    inline-size: min(100%, 22rem);
+    block-size: auto;
+  }
+
+  .stage__reading {
+    margin-block-start: 0.5rem;
+    color: var(--soft);
+  }
+
+  .stage__tagline {
+    margin-block-start: 0.25rem;
+    font-size: 1.125rem;
+  }
+
+  .stage__figure {
+    min-inline-size: 0;
+  }
+
+  .profile {
+    display: grid;
+    align-content: start;
+  }
+
+  .profile > div {
+    display: grid;
+    grid-template-columns: 5.5em minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 0.6rem;
+  }
+
+  .profile > div + div {
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .profile dt {
+    color: var(--soft);
+  }
+
+  .profile dd {
+    margin: 0;
+  }
+
+  @media (min-width: 56rem) {
+    .stage__grid {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      grid-template-areas:
+        "head figure"
+        "profile figure";
+      grid-template-rows: auto 1fr;
+      column-gap: clamp(2rem, 5vw, 4rem);
+      align-items: start;
+    }
+
+    .stage__grid--yoraya {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+      grid-template-areas:
+        "figure head"
+        "figure profile";
+    }
+
+    .stage__head {
+      grid-area: head;
+    }
+
+    .stage__figure {
+      grid-area: figure;
+    }
+
+    .profile {
+      grid-area: profile;
+    }
+  }
+
+  .alt-design {
+    margin-block-start: 2.5rem;
+    border-block-start: 1px solid var(--rule);
+    padding-block-start: 1.25rem;
+  }
+
+  .alt-design summary {
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .character-text {
+    display: grid;
+  }
+
+  .character-text__art {
+    /* 格線項目加了 auto 邊距就不會自動撐滿，沒寫寬度會縮到只剩圖說那麼寬 */
+    inline-size: min(100%, 24rem);
+    margin-inline: auto;
+    margin-block-start: 3rem;
+  }
+
+  /* 桌機把插圖放到文字右邊，跟著捲動停在上方 */
+  @media (min-width: 64rem) {
+    .character-text {
+      grid-template-columns: minmax(0, 1fr) clamp(16rem, 26vw, 22rem);
+      column-gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: start;
+    }
+
+    .character-text__art {
+      position: sticky;
+      top: 2rem;
+      align-self: start;
+      margin-block-start: 0;
+    }
+  }
+
+  .alt-design[open] summary {
+    margin-block-end: 1.5rem;
+  }
+
+  .alt-design :global(.sheet-grid) {
+    max-inline-size: 24rem;
+  }
+
+  .notion-note {
+    margin-block-start: 1.5rem;
+    color: var(--soft);
+    font-size: 0.9375rem;
+  }
+
+  .next-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .next-links__character {
+    display: grid;
+    gap: 0.75rem;
+    inline-size: min(12rem, 100%);
+    text-decoration: none;
+  }
+
+  .next-links__character img {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+  }
+</style>
