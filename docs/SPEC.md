@@ -84,7 +84,7 @@ export default defineConfig({
     Cache-Control: public, max-age=31556952, immutable
   ```
 
-- `wrangler.jsonc`：Worker 名稱 `oc-intro`，`assets.directory` 指到 `./dist`，`not_found_handling` 設 `404-page`（Astro 自己有 `dist/404.html`，不能用 SPA fallback）。
+- `wrangler.jsonc`：Worker 名稱 `oc-intro`，`assets.directory` 指到 `./dist`，`html_handling` 設 `force-trailing-slash`（對齊 Astro 的 `trailingSlash: 'always'`，`/koro` 會 307 到 `/koro/`），`not_found_handling` 設 `404-page`（Astro 自己有 `dist/404.html`，不能用 SPA fallback）。
 - `README.md`：怎麼跑（dev、build、test）、Workers Builds 設定（Build command `npm run build`、Deploy command `npx wrangler deploy`、環境變數 `SITE_URL` 填正式網址，沒填就用 `https://twinstar-fantasia.tw`）、內容改哪裡（`src/data/`）、素材來源看本文件第 9 節。
 
 ## 3. 已經備好、不要改的東西
