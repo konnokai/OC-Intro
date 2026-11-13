@@ -1,0 +1,84 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { GalleryItem } from '../data/characters';
+
+interface Props {
+  items: GalleryItem[];
+}
+
+const { items } = Astro.props;
+
+const sheets = await Promise.all(
+  items.map(async (item) => ({
+    ...item,
+    full: await getImage({ src: item.image, format: 'webp', quality: 90 }),
+  })),
+);
+---
+
+<div class="sheet-grid">
+  {
+    sheets.map((item) => (
+      <figure class="sheet">
+        <a
+          href={item.full.src}
+          data-lightbox="true"
+          data-caption={item.caption}
+          data-alt={item.alt}
+          data-width={item.image.width}
+          data-height={item.image.height}
+        >
+          <Image
+            src={item.image}
+            alt={item.alt}
+            widths={[240, 360, 480, 720]}
+            sizes="(min-width: 56rem) 16rem, (min-width: 30rem) 30vw, 84vw"
+          />
+        </a>
+        <figcaption>
+          <span class="sheet__caption">{item.caption}</span>
+          {item.note && <span class="sheet__note">{item.note}</span>}
+        </figcaption>
+      </figure>
+    ))
+  }
+</div>
+
+<style>
+  .sheet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+    gap: 1.5rem 1.25rem;
+  }
+
+  .sheet a {
+    display: block;
+    aspect-ratio: 4 / 5;
+    padding: 0.75rem;
+    background: #fff;
+    border: 1px solid var(--rule);
+  }
+
+  .sheet img {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: contain;
+  }
+
+  .sheet figcaption {
+    margin-block-start: 0.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  .sheet__caption,
+  .sheet__note {
+    display: block;
+  }
+
+  .sheet__note {
+    color: var(--soft);
+    font-size: 0.875rem;
+  }
+</style>

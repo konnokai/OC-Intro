@@ -1,5 +1,8 @@
 node_modules/
 dist/
+.astro/
+_raw/
+.openchamber/
 .DS_Store
 Thumbs.db
 *.log

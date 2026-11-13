@@ -1,0 +1,130 @@
+---
+import { Image } from 'astro:assets';
+import type { Character } from '../data/characters';
+
+interface Props {
+  character: Character;
+}
+
+const { character } = Astro.props;
+const { slug, figure } = character;
+---
+
+<div class="figure-stage" data-figure-stage>
+  {slug === 'yoraya' && <div class="figure-stage__moon" aria-hidden="true"></div>}
+  <div class="figure-stack" style={`view-transition-name: figure-${slug}`}>
+    <Image
+      src={figure.armed}
+      alt={figure.armedAlt}
+      data-figure="armed"
+      loading="eager"
+      fetchpriority="high"
+      widths={[480, 720, 960, 1280, 1600]}
+      sizes="(min-width: 56rem) 50vw, 92vw"
+    />
+    <Image
+      src={figure.plain}
+      alt={figure.plainAlt}
+      data-figure="plain"
+      hidden
+      loading="lazy"
+      widths={[480, 720, 960, 1280, 1600]}
+      sizes="(min-width: 56rem) 50vw, 92vw"
+    />
+  </div>
+  <div class="figure-toggle" role="group" aria-label="立繪版本" data-figure-toggle>
+    <button type="button" aria-pressed="true" data-show="armed">{figure.armedLabel}</button>
+    <button type="button" aria-pressed="false" data-show="plain">{figure.plainLabel}</button>
+  </div>
+</div>
+
+<style>
+  .figure-stage {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+  }
+
+  .figure-stage__moon {
+    position: absolute;
+    inset-block-start: 4%;
+    inset-inline-start: 50%;
+    translate: -50% 0;
+    inline-size: min(88%, 30rem);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--moon);
+    z-index: 0;
+  }
+
+  .figure-stack {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    justify-items: center;
+    min-inline-size: 0;
+  }
+
+  .figure-stack :global(img) {
+    grid-area: 1 / 1;
+    inline-size: auto;
+    max-inline-size: 100%;
+    block-size: auto;
+    max-block-size: min(84svh, 48rem);
+    object-fit: contain;
+  }
+
+  .figure-toggle {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .figure-toggle button {
+    min-block-size: 2.75rem;
+    padding: 0.25rem 1.35rem;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    background: transparent;
+    color: inherit;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+  }
+
+  .figure-toggle button[aria-pressed="true"] {
+    border-color: var(--moon);
+    background: var(--moon);
+    color: var(--ink);
+  }
+
+  /* 選中的鈕字是深色，焦點框跟著字色會融進深色底，所以固定用月色 */
+  .figure-toggle button:focus-visible {
+    outline-color: var(--moon);
+  }
+</style>
+
+<script>
+  for (const group of document.querySelectorAll('[data-figure-toggle]')) {
+    const stage = group.closest('[data-figure-stage]');
+
+    // 另一張立繪平常不載入。滑鼠或焦點一靠近切換鈕就先抓，按下去才不會空白一下
+    const preload = () => {
+      for (const img of stage.querySelectorAll('[data-figure]')) img.loading = 'eager';
+    };
+    group.addEventListener('pointerenter', preload, { once: true });
+    group.addEventListener('focusin', preload, { once: true });
+
+    group.addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-show]');
+      if (!button) return;
+      for (const b of group.querySelectorAll('button[data-show]')) {
+        b.setAttribute('aria-pressed', String(b === button));
+      }
+      for (const img of stage.querySelectorAll('[data-figure]')) {
+        img.hidden = img.dataset.figure !== button.dataset.show;
+      }
+    });
+  }
+</script>

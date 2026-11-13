@@ -1,0 +1,65 @@
+---
+interface Props {
+  heading: string;
+  level?: 2 | 3;
+  id?: string;
+}
+
+const { heading, level = 2, id } = Astro.props;
+const Heading = `h${level}`;
+---
+
+<section class="v-section" id={id}>
+  <Heading class="v-section__title">{heading}</Heading>
+  <div class="v-section__body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .v-section {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .v-section + .v-section {
+    margin-block-start: clamp(3rem, 7vw, 6rem);
+  }
+
+  .v-section__title {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+  }
+
+  .v-section__body {
+    max-inline-size: var(--measure);
+  }
+
+  @media (min-width: 56rem) {
+    .v-section {
+      grid-template-columns: 4rem minmax(0, 1fr);
+      gap: 0;
+    }
+
+    .v-section__title {
+      writing-mode: vertical-rl;
+      letter-spacing: 0.3em;
+      font-size: 1.75rem;
+      position: sticky;
+      /* 直書元素的 inset-block-start 會變成右邊，要黏在上方得寫 top */
+      top: 2rem;
+      align-self: start;
+    }
+
+    .v-section__body {
+      border-inline-start: 1px solid var(--rule);
+      padding-inline-start: clamp(2rem, 4vw, 3.5rem);
+      max-inline-size: none;
+    }
+
+    .v-section__body > :global(p) {
+      max-inline-size: var(--measure);
+    }
+  }
+</style>
